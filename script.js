@@ -7,8 +7,6 @@ const CLOUD_INDEX_KEY="barmaan_cloud_code_index";
 const CLOUD_REDEEMED_KEY="barmaan_cloud_redeemed";
 const FULL_ACCESS_KEY="barmaan_full_access";
 const VIEW_MORE_KEY="barmaan_rewards_view_more";
-const MISSION_DAY_KEY="barmaan_mission_day";
-const MISSION_DONE_KEY="barmaan_mission_done";
 const MISSION_QUESTION_KEY="barmaan_mission_question";
 const MISSION_ANSWER_KEY="barmaan_mission_answer";
 const MISSION_REWARD_KEY="barmaan_mission_reward";
@@ -55,13 +53,21 @@ const viewMoreBtn=document.getElementById("viewMoreBtn");
 
 function getNumber(key){
   const value=Number(localStorage.getItem(key));
-  return Number.isFinite(value)&&value>=0?value:0;
+
+  return Number.isFinite(value)&&value>=0
+    ?value
+    :0;
 }
 
 function setNumber(key,value){
   localStorage.setItem(
     key,
-    String(Math.max(0,Math.floor(value)))
+    String(
+      Math.max(
+        0,
+        Math.floor(value)
+      )
+    )
   );
 }
 
@@ -70,7 +76,10 @@ function getPoints(){
 }
 
 function setPoints(value){
-  setNumber(POINTS_KEY,value);
+  setNumber(
+    POINTS_KEY,
+    value
+  );
 }
 
 function getReady(){
@@ -78,7 +87,10 @@ function getReady(){
 }
 
 function setReady(value){
-  setNumber(READY_KEY,value);
+  setNumber(
+    READY_KEY,
+    value
+  );
 }
 
 function todayKey(){
@@ -86,13 +98,19 @@ function todayKey(){
 
   return date.getFullYear()+
     "-"+
-    String(date.getMonth()+1).padStart(2,"0")+
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0")+
     "-"+
-    String(date.getDate()).padStart(2,"0");
+    String(
+      date.getDate()
+    ).padStart(2,"0");
 }
 
 function dateFromKey(key){
-  if(!key)return null;
+  if(!key){
+    return null;
+  }
 
   const parts=key.split("-");
 
@@ -106,7 +124,9 @@ function dateFromKey(key){
     Number(parts[2])
   );
 
-  return Number.isNaN(date.getTime())
+  return Number.isNaN(
+    date.getTime()
+  )
     ?null
     :date;
 }
@@ -157,7 +177,8 @@ function updateDailyReady(){
 
   if(days>0){
     setReady(
-      getReady()+(days*20)
+      getReady()+
+      days*20
     );
 
     localStorage.setItem(
@@ -168,23 +189,29 @@ function updateDailyReady(){
 }
 
 function formatPoints(value){
-  return Math.floor(value)
-    .toLocaleString()+
+  return Math.floor(
+    value
+  ).toLocaleString()+
     " points";
 }
 
 function formatCredit(value){
-  return Math.floor(value)
-    .toLocaleString()+
+  return Math.floor(
+    value
+  ).toLocaleString()+
     "¢";
 }
 
 function updateProgress(){
   pointsDisplay.textContent=
-    formatPoints(getPoints());
+    formatPoints(
+      getPoints()
+    );
 
   readyDisplay.textContent=
-    formatPoints(getReady());
+    formatPoints(
+      getReady()
+    );
 
   claimBtn.disabled=
     getReady()<=0;
@@ -202,48 +229,63 @@ function showMessage(text){
   );
 
   showMessage.timer=
-    setTimeout(()=>{
-      messageBox.classList.add(
-        "hidden"
-      );
-    },2500);
+    setTimeout(
+      ()=>{
+        messageBox.classList.add(
+          "hidden"
+        );
+      },
+      2500
+    );
 }
 
 function switchPage(page){
   document.querySelectorAll(
     ".page"
-  ).forEach(item=>{
-    item.classList.remove(
-      "active"
-    );
-  });
+  ).forEach(
+    item=>{
+      item.classList.remove(
+        "active"
+      );
+    }
+  );
 
   document.querySelectorAll(
     ".top-btn"
-  ).forEach(item=>{
-    item.classList.remove(
-      "active"
-    );
-  });
+  ).forEach(
+    item=>{
+      item.classList.remove(
+        "active"
+      );
+    }
+  );
 
   if(page==="progress"){
     document.getElementById(
       "progressPage"
-    ).classList.add("active");
+    ).classList.add(
+      "active"
+    );
 
     document.querySelector(
       '[data-page="progress"]'
-    ).classList.add("active");
+    ).classList.add(
+      "active"
+    );
   }
 
   if(page==="rewards"){
     document.getElementById(
       "rewardsPage"
-    ).classList.add("active");
+    ).classList.add(
+      "active"
+    );
 
     document.querySelector(
       '[data-page="rewards"]'
-    ).classList.add("active");
+    ).classList.add(
+      "active"
+    );
 
     renderRewards();
   }
@@ -251,16 +293,18 @@ function switchPage(page){
 
 document.querySelectorAll(
   ".top-btn"
-).forEach(button=>{
-  button.addEventListener(
-    "click",
-    ()=>{
-      switchPage(
-        button.dataset.page
-      );
-    }
-  );
-});
+).forEach(
+  button=>{
+    button.addEventListener(
+      "click",
+      ()=>{
+        switchPage(
+          button.dataset.page
+        );
+      }
+    );
+  }
+);
 
 missionsBtn.addEventListener(
   "click",
@@ -325,15 +369,16 @@ function createMission(){
       )
     ];
 
-  let a;
-  let b;
-  let answer;
-  let reward;
-  let symbol;
+  let a=0;
+  let b=0;
+  let answer=0;
+  let reward=0;
+  let symbol="";
 
   if(type==="addition"){
     a=randomInt(5,100);
     b=randomInt(5,100);
+
     answer=a+b;
     reward=30;
     symbol="+";
@@ -342,6 +387,7 @@ function createMission(){
   if(type==="subtraction"){
     a=randomInt(20,120);
     b=randomInt(1,a);
+
     answer=a-b;
     reward=30;
     symbol="-";
@@ -350,6 +396,7 @@ function createMission(){
   if(type==="multiplication"){
     a=randomInt(2,15);
     b=randomInt(2,15);
+
     answer=a*b;
     reward=50;
     symbol="×";
@@ -359,6 +406,7 @@ function createMission(){
     b=randomInt(2,12);
     answer=randomInt(2,15);
     a=b*answer;
+
     reward=100;
     symbol="÷";
   }
@@ -382,34 +430,9 @@ function createMission(){
     MISSION_REWARD_KEY,
     String(reward)
   );
-
-  localStorage.setItem(
-    MISSION_DAY_KEY,
-    todayKey()
-  );
-
-  localStorage.removeItem(
-    MISSION_DONE_KEY
-  );
 }
 
 function prepareMission(){
-  const today=todayKey();
-
-  const savedDay=
-    localStorage.getItem(
-      MISSION_DAY_KEY
-    );
-
-  const done=
-    localStorage.getItem(
-      MISSION_DONE_KEY
-    )==="true";
-
-  if(savedDay!==today){
-    createMission();
-  }
-
   if(!localStorage.getItem(
     MISSION_QUESTION_KEY
   )){
@@ -445,32 +468,17 @@ function prepareMission(){
   mathAnswer.value="";
   missionResult.textContent="";
 
-  if(done){
-    answerBtn.disabled=true;
-    mathAnswer.disabled=true;
-
-    missionResult.textContent=
-      "Mission already completed today.";
-  }else{
-    answerBtn.disabled=false;
-    mathAnswer.disabled=false;
-  }
+  answerBtn.disabled=false;
+  mathAnswer.disabled=false;
 }
 
 answerBtn.addEventListener(
   "click",
   ()=>{
-    const done=
-      localStorage.getItem(
-        MISSION_DONE_KEY
-      )==="true";
-
-    if(done){
-      return;
-    }
-
     const input=
-      Number(mathAnswer.value);
+      Number(
+        mathAnswer.value
+      );
 
     const correct=
       Number(
@@ -502,14 +510,6 @@ answerBtn.addEventListener(
       getPoints()+reward
     );
 
-    localStorage.setItem(
-      MISSION_DONE_KEY,
-      "true"
-    );
-
-    answerBtn.disabled=true;
-    mathAnswer.disabled=true;
-
     missionResult.textContent=
       "Correct! +"+
       reward+
@@ -522,6 +522,15 @@ answerBtn.addEventListener(
       "Mission complete! +"+
       reward+
       " points."
+    );
+
+    createMission();
+
+    setTimeout(
+      ()=>{
+        prepareMission();
+      },
+      500
     );
   }
 );
@@ -622,56 +631,68 @@ function redeemAppReward(reward){
   renderRewards();
   updateProgress();
 
-  const items=
-    appRewards.querySelectorAll(
-      ".reward-item"
-    );
-
-  const index=
-    APP_REWARDS.indexOf(
-      reward
-    );
-
-  const showAll=
+  const rewards=
     localStorage.getItem(
-      VIEW_MORE_KEY
-    )==="true";
+      "barmaan_redeemed_app_rewards"
+    );
 
-  const visibleIndex=
-    showAll
-      ?index
-      :index;
+  let redeemed=[];
 
-  if(items[visibleIndex]){
-    const info=
-      items[visibleIndex]
-      .querySelector(
-        ".reward-info"
-      );
-
-    if(info){
-      const code=
-        document.createElement(
-          "div"
-        );
-
-      code.className=
-        "reward-code";
-
-      code.textContent=
-        "Code: "+
-        reward.code;
-
-      info.appendChild(code);
-    }
+  try{
+    redeemed=
+      rewards
+        ?JSON.parse(rewards)
+        :[];
+  }catch(error){
+    redeemed=[];
   }
+
+  if(!Array.isArray(redeemed)){
+    redeemed=[];
+  }
+
+  if(!redeemed.includes(
+    reward.code
+  )){
+    redeemed.push(
+      reward.code
+    );
+  }
+
+  localStorage.setItem(
+    "barmaan_redeemed_app_rewards",
+    JSON.stringify(redeemed)
+  );
+
+  renderRewards();
 
   showMessage(
     "Redeemed "+
-    formatCredit(reward.value)+
+    formatCredit(
+      reward.value
+    )+
     ". Code: "+
     reward.code
   );
+}
+
+function isAppRewardRedeemed(reward){
+  let redeemed=[];
+
+  try{
+    redeemed=JSON.parse(
+      localStorage.getItem(
+        "barmaan_redeemed_app_rewards"
+      )||"[]"
+    );
+  }catch(error){
+    redeemed=[];
+  }
+
+  return Array.isArray(redeemed)&&
+    redeemed.includes(
+      reward.code
+    );
 }
 
 function renderRewards(){
@@ -689,10 +710,38 @@ function renderRewards(){
 
   rewards.forEach(
     reward=>{
-      appRewards.appendChild(
+      const item=
         createRewardElement(
           reward
-        )
+        );
+
+      const info=
+        item.querySelector(
+          ".reward-info"
+        );
+
+      if(isAppRewardRedeemed(
+        reward
+      )){
+        const code=
+          document.createElement(
+            "div"
+          );
+
+        code.className=
+          "reward-code";
+
+        code.textContent=
+          "Code: "+
+          reward.code;
+
+        info.appendChild(
+          code
+        );
+      }
+
+      appRewards.appendChild(
+        item
       );
     }
   );
@@ -787,9 +836,6 @@ fullAccessBtn.addEventListener(
       FULL_ACCESS_KEY,
       "true"
     );
-
-    fullAccessCode.textContent=
-      "Code: 1257";
 
     updateProgress();
     updateFullAccess();
