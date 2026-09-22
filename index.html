@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Barmaan Vebs Rewards</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">Barmaan Vebs</div>
+  <nav>
+    <button class="top-btn active" data-page="progress">The progress</button>
+    <button class="top-btn" data-page="rewards">Rewards</button>
+  </nav>
+</header>
+
+<main>
+<section id="progressPage" class="page active">
+  <button id="missionsBtn" class="missions-btn">Missions</button>
+
+  <div class="progress-card">
+    <h2>Points</h2>
+    <div id="pointsDisplay" class="points">0 points</div>
+    <p>Your points are saved in Local Storage.</p>
+  </div>
+
+  <div class="claim-card">
+    <h2>Ready to claim</h2>
+    <div id="readyDisplay" class="ready-points">0 points</div>
+    <button id="claimBtn" class="main-btn">Claim points</button>
+  </div>
+
+  <div id="missionsBox" class="missions-box hidden">
+    <h2>Missions</h2>
+    <p>Come back every day to receive 20 points.</p>
+    <p>Unclaimed points stay saved and keep adding up.</p>
+  </div>
+</section>
+
+<section id="rewardsPage" class="page">
+  <div class="reward-header">
+    <h1>Rewards</h1>
+  </div>
+
+  <div class="reward-section">
+    <div class="section-title">
+      <h2>App store credit</h2>
+      <button id="viewMoreBtn" class="small-btn">View more</button>
+    </div>
+    <div id="appRewards" class="reward-list"></div>
+  </div>
+
+  <div class="reward-section">
+    <h2>Full access Barmaan Vebs</h2>
+    <div class="special-card">
+      <p class="value">Full access Barmaan Vebs</p>
+      <p>Points needed: <strong>2,000 points</strong></p>
+      <p>Code: <strong>1257</strong></p>
+      <button id="fullAccessBtn" class="redeem-btn">Redeem</button>
+    </div>
+  </div>
+
+  <div class="reward-section">
+    <h2>Cloud credit</h2>
+    <div class="special-card">
+      <p>Points needed: <strong>5,000 points</strong></p>
+      <div id="cloudCodeArea"></div>
+      <button id="cloudRedeemBtn" class="redeem-btn">Redeem</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<div id="messageBox" class="message hidden"></div>
+<script src="script.js"></script>
+</body>
+</html>
