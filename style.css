@@ -1,0 +1,247 @@
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f6f8;
+  color:#17202a;
+  min-height:100vh;
+}
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:white;
+  border-bottom:1px solid #ddd;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-size:20px;
+  font-weight:700;
+}
+nav{
+  display:flex;
+  gap:8px;
+}
+.top-btn{
+  border:0;
+  background:#eee;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+}
+.top-btn.active{
+  background:#111;
+  color:white;
+}
+main{
+  width:100%;
+  max-width:760px;
+  margin:auto;
+  padding:20px;
+}
+.page{
+  display:none;
+}
+.page.active{
+  display:block;
+}
+.missions-btn{
+  width:100%;
+  border:0;
+  background:#111;
+  color:white;
+  padding:15px;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  margin-bottom:16px;
+}
+.progress-card,
+.claim-card,
+.special-card{
+  background:white;
+  border:1px solid #ddd;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:16px;
+}
+.progress-card h2,
+.claim-card h2,
+.reward-section h2{
+  margin-bottom:12px;
+}
+.points{
+  font-size:30px;
+  font-weight:800;
+  margin:12px 0;
+}
+.ready-points{
+  font-size:26px;
+  font-weight:800;
+  margin:12px 0;
+}
+.main-btn{
+  border:0;
+  background:#111;
+  color:white;
+  padding:13px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+}
+.main-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+.missions-box{
+  background:white;
+  border:1px solid #ddd;
+  border-radius:16px;
+  padding:20px;
+  margin-top:16px;
+}
+.hidden{
+  display:none!important;
+}
+.reward-section{
+  background:white;
+  border:1px solid #ddd;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:18px;
+}
+.reward-header{
+  margin-bottom:18px;
+}
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+.small-btn{
+  border:1px solid #bbb;
+  background:#fff;
+  padding:9px 12px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:700;
+}
+.reward-list{
+  display:grid;
+  gap:10px;
+}
+.reward-item{
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.reward-info{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.reward-value{
+  font-size:21px;
+  font-weight:800;
+}
+.reward-needed{
+  font-size:13px;
+  color:#666;
+}
+.redeem-btn{
+  border:0;
+  background:#111;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:700;
+  white-space:nowrap;
+}
+.redeem-btn.disabled,
+.redeem-btn:disabled{
+  background:#aaa;
+  color:#eee;
+  cursor:not-allowed;
+}
+.value{
+  font-size:23px;
+  font-weight:800;
+  margin-bottom:10px;
+}
+.special-card p{
+  margin-bottom:9px;
+}
+.cloud-code{
+  background:#f0f0f0;
+  border-radius:10px;
+  padding:12px;
+  margin:12px 0;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-align:center;
+}
+.owned-btn{
+  width:100%;
+  border:1px solid #aaa;
+  background:white;
+  padding:11px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:700;
+}
+.empty-slot{
+  padding:13px;
+  background:#f1f1f1;
+  border-radius:10px;
+  font-weight:700;
+  text-align:center;
+}
+.message{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%);
+  background:#111;
+  color:#fff;
+  padding:13px 18px;
+  border-radius:12px;
+  z-index:50;
+  max-width:90%;
+  text-align:center;
+}
+@media(max-width:600px){
+  main{
+    padding:14px;
+  }
+  .topbar{
+    padding:11px;
+  }
+  .logo{
+    font-size:17px;
+  }
+  .top-btn{
+    padding:9px 10px;
+  }
+  .reward-item{
+    align-items:flex-start;
+  }
+  .redeem-btn{
+    padding:9px 11px;
+  }
+}
